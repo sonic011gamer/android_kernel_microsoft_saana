@@ -1,0 +1,25 @@
+/*
+   Gsensor - STMarco LIS3DSHTR
+
+*/
+    STM,gsensor@1d {
+        compatible = "fih,gsensor";
+        reg = <0x1d>;
+        interrupt-parent = <&msm_gpio>;
+        interrupts = <91 0x2008>,<110 0x2008>;
+        pinctrl-names = "gsensor_active","gsensor_suspend";
+        pinctrl-0 = <&gsensor_irq1_default &gsensor_irq2_default>;
+        pinctrl-1 = <&gsensor_irq1_sleep &gsensor_irq2_sleep>;
+        vcc_i2c-supply = <&pm8909_l6>;
+        vcc-supply = <&pm8909_l17>;
+        gsensor,irq1-gpio  = <&msm_gpio 91 0x2008>;
+        gsensor,irq2-gpio  = <&msm_gpio 110 0x2008>;
+        st,gpio-int1 = <&msm_gpio 91 0x2008>;
+        st,gpio-int2 = <&msm_gpio 110 0x2008>;
+        st,axis-map-x = <0>;
+        st,axis-map-y = <1>;
+        st,axis-map-z = <2>;
+        st,negate-x;
+        st,negate-y;
+        st,g-range = <4>;
+};

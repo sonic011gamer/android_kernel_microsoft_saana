@@ -1,0 +1,257 @@
+/*
+ * Copyright (c) 2014-2015, 2017, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/ {
+	e1m_batterydata: qcom,battery-data { /* NEED TO MODIFY*/
+		qcom,rpull-up-kohm = <100>;
+		qcom,vref-batt-therm = <1800000>;
+
+	/*
+	 * unknow battery data must to be listed in the bottom
+	 */
+		/include/ "components/power/batterydata-E1M.dtsi"
+		/include/ "components/power/batterydata-E1M_200.dtsi"
+		/include/ "components/power/batterydata-scud-4v35-2500mah_unknow.dtsi"
+	};
+};
+
+
+
+&pm8909_chg {
+	status = "ok";
+	qcom,vddmax-mv = <4400>;
+	qcom,vddsafe-mv = <4400>;
+	qcom,vinmin-mv = <4500>;
+	qcom,cool-bat-mv = <4400>;
+	qcom,warm-bat-mv = <4200>;
+	qcom,ibatmax-warm-ma = <1170>;
+	qcom,ibatmax-cool-ma = <1170>;
+	qcom,ibatmax-ma = <1440>;
+	qcom,thermal-mitigation = <1440 720 450 180>;
+	qcom,tchg-mins = <512>;
+	qcom,disable-vbatdet-based-recharge;
+};
+
+&pm8909_bms {
+	status = "ok";
+	qcom,battery-data = <&e1m_batterydata>;
+	qcom,shutdown-soc-valid-limit = <20>;
+	qcom,v-cutoff-uv = <3400000>;
+	qcom,max-voltage-uv = <4400000>;
+	qcom,batt-aging-comp;
+	qcom,use-reported-soc;
+	fih,turn-on-log;
+	qcom,resume-soc = <95>;
+};
+
+&pm8909_vadc {
+	chan@30 {
+		qcom,scale-function = <18>;
+	};
+
+	chan@11 {
+		label = "case_therm";
+		reg = <0x11>; // channel for MPP2
+		qcom,decimation = <0>;
+		qcom,pre-div-channel-scaling = <0>; //Use 1:3 scaling to keep input voltage with in Max voltage: 1.8V
+		qcom,calibration-type = "ratiometric";
+		qcom,scale-function = <2>;
+		qcom,hw-settle-time = <1>;
+		qcom,fast-avg-setup = <0>;
+		qcom,vadc-thermal-node;
+	};
+};
+
+&pm8909_adc_tm {
+	chan@30 {
+		qcom,scale-function = <9>;
+	};
+};
+
+&spmi_bus {
+	qcom,pm8909@0 {
+		qcom,leds@a300 {
+			status = "disabled";
+			qcom,led_mpp_4 {
+				label = "mpp";
+				linux,name = "button-backlight";
+				linux,default-trigger = "none";
+				qcom,default-state = "off";
+				qcom,max-current = <40>;
+				qcom,current-setting = <5>;
+				qcom,id = <6>;
+				qcom,mode = "manual";
+				qcom,source-sel = <1>;
+				qcom,mode-ctrl = <0x60>;
+			};
+		};
+/*
+  AlanHZChang, Follow FIH BOOT REQE V3.0,
+   - PMIC RESIN: Volume UP KEY(KEY CODE 115)
+   - KPDPWR/RESIN DO NOT TRIGGER RESET FUNCTION
+   - KPDPWR+RESIN TRIGGER RESET FUNCTION
+*/
+     qcom,power-on@800 {
+         compatible = "qcom,qpnp-power-on";
+         reg = <0x800 0x100>;
+         interrupts = <0x0 0x8 0x0>,
+                 <0x0 0x8 0x1>,
+                 <0x0 0x8 0x4>,
+                 <0x0 0x8 0x5>;
+         interrupt-names = "kpdpwr", "resin",
+                 "resin-bark", "kpdpwr-resin-bark";
+         qcom,pon-dbc-delay = <15625>;
+         qcom,system-reset;
+         qcom,clear-warm-reset;
+         qcom,store-hard-reset-reason;
+         qcom,s3-debounce = <128>;
+         qcom,s3-src = "kpdpwr-and-resin";
+
+      /* PON: KPDPWR */
+      qcom,pon_1 {
+          qcom,pon-type = <0>;
+          qcom,pull-up = <1>;
+          linux,code = <116>;
+          qcom,support-reset = <0>;
+      };
+
+      /* PON: RESIN */
+      qcom,pon_2 {
+          qcom,pon-type = <1>;
+          qcom,pull-up = <1>;
+          linux,code = <114>;
+          qcom,support-reset = <0>;
+      };
+
+      /* PON: KPDPWR + RESIN */
+      qcom,pon_3 {
+        qcom,pon-type = <3>;
+        qcom,support-reset = <1>;
+        /* RESET TRIGGER TIME: S1 + S2 = 8720ms */
+        qcom,s1-timer = <6720>;
+        qcom,s2-timer = <2000>;
+        /* RESET TYPE: SHUTDOWN */
+        qcom,s2-type = <4>;
+        qcom,pull-up = <1>;
+        qcom,use-bark;				
+			};
+		};
+	};
+
+	qcom,pm8909@1 {
+		qcom,vibrator@c000 {
+			status = "okay";
+			qcom,vib-timeout-ms = <15000>;
+			qcom,vib-vtg-level-mV = <3100>;
+		};
+	};
+};
+
+&pm8909_mpps {
+	mpp@a000 { /* MPP 1 */
+		/* VDD_PX */
+		status = "disabled";
+	};
+
+	//mpp@a100 { /* MPP 2 */
+		/* Backlight PWM */
+		//qcom,mode = <1>;		/* Digital output */
+		//qcom,invert = <0>;		/* Disable invert */
+		//qcom,src-sel = <4>;		/* DTEST1 */
+		//qcom,vin-sel = <0>;		/* VPH_PWR */
+		//qcom,master-en = <1>;		/* Enable MPP */
+	//};
+
+	mpp@a100 {	/* MPP 2 */
+		reg = <0xa100 0x100>;
+		qcom,pin-num = <2>;
+		qcom,mode = <4>; // A-input
+		qcom,src-sel = <0>; //MPP Constant
+		qcom,ain-route = <1>; // QPNP_PIN_AIN_AMUX_CH6 = 1 for MPP2
+		qcom,master-en = <1>; //Enable MPP
+	};
+	
+	mpp@a200 { /* MPP 3 */
+		/* VREF DAC */
+		status = "disabled";
+	};
+
+	mpp@a300 { /* MPP 4 */
+		/* HR LED */
+		status = "disabled";
+	};
+};
+
+&pm8909_gpios {
+	gpio@c000 { /* GPIO 1 */
+		/* Battery UICC Alarm */
+		status = "disabled";
+	};
+
+	gpio@c100 { /* GPIO 2 */
+		/* NFC_CLK_REQ */
+		qcom,mode = <0>; /* QPNP_PIN_MODE_DIG_IN */
+		qcom,pull = <5>; /* QPNP_PIN_PULL_NO */
+		qcom,vin-sel = <2>; /* QPNP_PIN_VIN2 */
+		qcom,src-sel = <2>; /* QPNP_PIN_SEL_FUNC_1 */
+		qcom,master-en = <1>;
+	};
+
+	gpio@c200 { /* GPIO 3 */
+		/* External regulator control for WTR */
+		status = "disabled";
+	};
+
+	gpio@c300 { /* GPIO 4 */
+		/* External regulator control for APC */
+		status = "disabled";
+	};
+};
+
+
+&spk_vreg {
+	status = "okay";
+};
+
+&pm8909_conga_dig {
+	cdc-vdd-spkdrv-supply = <&spk_vreg>;
+	qcom,cdc-vdd-spkdrv-voltage = <5000000 5000000>;
+	qcom,cdc-vdd-spkdrv-current = <20000>;
+	qcom,cdc-on-demand-supplies = "cdc-vdd-mic-bias",
+				      "cdc-vdd-spkdrv";
+	qcom,subsys-name = "modem";
+};
+
+&wcnss {
+	qcom,wcnss-vadc = <&pm8909_vadc>;
+};
+
+&soc {
+	i2c@78b6000 {
+		nq@28 {
+			qcom,nq-clkreq = <&pm8909_gpios 2 0>;
+		};
+	};
+};
+
+
+/* Modify AMP BOOST gpio pin*/
+&soc {
+	spk_vreg: regulator_spk {
+		compatible = "regulator-fixed";
+		regulator-name = "spk_vreg";
+		startup-delay-us = <0>;
+		enable-active-high;
+		gpio = <&msm_gpio 22 0>;
+	};
+};

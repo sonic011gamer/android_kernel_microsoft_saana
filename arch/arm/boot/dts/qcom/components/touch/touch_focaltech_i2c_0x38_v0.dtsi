@@ -1,0 +1,22 @@
+		focaltech@38{
+			compatible = "focaltech,fts";
+			reg = <0x38>;
+			interrupt-parent = <&msm_gpio>;
+			interrupts = <13 0x02>;
+			focaltech,reset-gpio = <&msm_gpio 12 0x01>;
+			focaltech,irq-gpio = <&msm_gpio 13 0x02>;
+			/* pins used by touchscreen */
+			pinctrl-names = "pmx_ts_active",
+			"pmx_ts_suspend",
+			"pmx_ts_release";
+			pinctrl-0 = <&ts_int_active &ts_reset_active>;
+			pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
+			pinctrl-2 = <&ts_release>;
+			focaltech,max-touch-number = <10>;
+			focaltech,display-coords =  <0 0 720 1280>;
+			focaltech,have-key;
+			focaltech,key-number = <3>;
+			focaltech,keys = <139 102 158>;
+			focaltech,key-y-coord = <2000>;
+			focaltech,key-x-coords = <200 600 800>;
+		};

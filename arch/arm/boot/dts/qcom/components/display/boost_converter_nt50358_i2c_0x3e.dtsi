@@ -1,0 +1,11 @@
+/*
+   Boost Converter IC - FITI POWER FP7720
+
+*/
+
+fp7720@3e {
+	compatible = "novatek,nt50358";
+	reg = <0x3e>;
+	novatek,avdd-voltage = <0x12>;
+	novatek,avee-voltage = <0x12>;
+};

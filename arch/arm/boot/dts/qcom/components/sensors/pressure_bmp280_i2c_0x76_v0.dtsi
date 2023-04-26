@@ -1,0 +1,6 @@
+fih_pressure@76{
+    compatible = "bmp280";
+    reg = <0x76>;
+    vcc_i2c-supply = <&pm8909_l6>;
+    mux_vcc-supply = <&pm8909_l17>;
+};

@@ -1,0 +1,7 @@
+fih_ecompass@12{
+    compatible = "bosch,bmm050";
+    reg = <0x12>;
+    vcc_i2c-supply = <&pm8909_l6>;
+    mux_vcc-supply = <&pm8909_l17>;
+    bosch,place = <1>;
+}; 

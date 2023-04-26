@@ -1,0 +1,8 @@
+fih_gsensor@10{
+    compatible = "bosch,bma2x2";
+    reg = <0x10>;
+    vcc_i2c-supply = <&pm8909_l6>;
+    mux_vcc-supply = <&pm8909_l17>;
+    bosch,irq1-gpio = <&msm_gpio 96 0>;
+    bosch,place = <5>;
+};

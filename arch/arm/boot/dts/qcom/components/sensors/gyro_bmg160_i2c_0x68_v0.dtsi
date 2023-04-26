@@ -1,0 +1,7 @@
+fih_gyro@68{
+    compatible = "bosch,bmg160";
+    reg = <0x68>;
+    vcc_i2c-supply = <&pm8909_l6>;
+    mux_vcc-supply = <&pm8909_l17>;
+    bosch,place = <2>;
+};

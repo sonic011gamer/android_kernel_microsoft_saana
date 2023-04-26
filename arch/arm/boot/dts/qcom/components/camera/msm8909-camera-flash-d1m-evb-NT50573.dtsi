@@ -1,0 +1,56 @@
+/*
+ * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/*********************************************************************************************
+*	slave-address : 0x63 (7bits)
+*	qcom,slave-id : <i2c_slave_address device_id_address id  >
+*
+*	Due to QUP i2c will shift i2c_slave_address RIGHT for one bit before sending i2c_msg,
+*
+*		saddr = dev_client->client->addr >> 1;
+*
+*	so i2c_slave_address needs to be shift LEFT for one bit first.
+*
+*	0xc6h (01100011b) : 0x63h (01100011b) <<1
+*
+**********************************************************************************************/
+/*********************************************************************************************
+*	Required properties:
+*	- gpios : should contain phandle to gpio controller node and array of
+*         #gpio-cells specifying specific gpio (controller specific)
+*
+*	Add for Qualcomm's bug. Even flash LED is not controled by gpio,
+*	it is necessary to add "gpios" property in device tree.
+*
+**********************************************************************************************/
+
+&i2c_3 {
+	led_flash1:qcom,led-flash@63 {
+		cell-index = <0>;
+		reg = <0x63>;
+		qcom,slave-id = <0xc6 0x00 0x002>;
+		compatible = "qcom,led-flash1";
+		label = "nt50573";
+		qcom,flash-type = <1>;
+		qcom,gpio-no-mux = <0>;
+		gpios = <&msm_gpio 31 0>,
+			<&msm_gpio 32 0>;
+		qcom,gpio-flash-en = <0>;
+		qcom,gpio-flash-now = <1>;
+		qcom,gpio-req-tbl-num = <0 1>;
+		qcom,gpio-req-tbl-flags = <0 0>;
+		qcom,gpio-req-tbl-label = "FLASH_EN",
+			"FLASH_NOW";
+		qcom,cci-master = <0>;
+	};
+};

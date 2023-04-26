@@ -1,0 +1,18 @@
+/*
+  FIH memory hole setting
+*/
+
+//qcom,fih-mem-hole {
+	//compatible = "qcom,fih-mem-hole";
+	//qcom,memblock-remove = <0x8DC00000 0x700000>; /* Address and Size of Hole */
+//};
+/ {
+        reserved-memory {
+                fih_mem: fih_region@0 {
+                        compatible = "removed-dma-pool";
+                        no-map;
+                        reg = <0 0x8DC00000 0 0x00700000>;
+                };
+        };
+
+};

@@ -1,0 +1,47 @@
+menu "fih driver"
+
+config FIH_HEADSET
+	bool "FIH heasdet"
+	default y
+
+config FIH_VIBRATOR
+	bool "FIH vibrator"
+	default n
+
+config FIH_MSM_PDM_VIB
+	tristate "Support msm pdm function"
+	depends on FIH_VIBRATOR
+	default n
+
+config FIH_DEVICE_TREE_DEBUG
+	bool "FIH Device Tree Debug"
+	default n
+
+config FIH_HALL_SENSOR
+	bool "FIH Hall sensor"
+	default n
+
+config FIH_INPUT_SENSOR
+  tristate "Sensor"
+  depends on I2C
+  default n
+
+config FIH_PRESSURE
+	bool "FIH pressure sensor"
+	default n
+
+config FIH_HUMIDITY
+	bool "FIH humidity sensor"
+	default n
+
+config FIH_USB
+	bool "fih usb"
+	default y
+	help
+	  support fih scsi function
+
+endmenu
+
+source "drivers/fih/9_axis_sensor/Kconfig"
+source "drivers/fih/pressure/Kconfig"
+source "drivers/fih/humidity/Kconfig"

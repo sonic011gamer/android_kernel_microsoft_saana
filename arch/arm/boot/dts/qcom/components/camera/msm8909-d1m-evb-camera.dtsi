@@ -1,0 +1,17 @@
+/*
+ * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+#include "msm8909-camera-flash-d1m-evb-NT50573.dtsi"
+#include "msm8909-camera-flash-d1m-evb-NT50573F.dtsi"
+#include "msm8909-camera-sensor-d1m-ov8858.dtsi"
+#include "msm8909-camera-sensor-d1m-s5k5e2.dtsi"

@@ -1,0 +1,23 @@
+/*
+   Gsensor - KIONIX KXCJK-1013
+
+*/
+
+	kionix@f {
+		compatible = "kionix,kxcjk-1013";
+		reg = <0x0f>;
+		interrupt-parent = <&msm_gpio>;
+		interrupts = <91 0x2008>;
+		vdd-supply = <&pm8909_l17>;
+		vio-supply = <&pm8909_l6>;
+                pinctrl-names = "gsensor_active","gsensor_suspend";
+                pinctrl-0 = <&gsensor_irq1_default>;
+                pinctrl-1 = <&gsensor_irq1_sleep>;
+		kionix,min_interval = <5>;
+		kionix,poll_interval = <100>;
+		kionix,accel_direction = <1>;
+		kionix,accel_irq_use_drdy = <0>;
+		kionix,accel_res = <12>;
+                kionix,gpio-int1 = <&msm_gpio 91 0x2008>;
+		kionix,accel_g_range = <4>;
+	};

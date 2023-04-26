@@ -1,0 +1,17 @@
+    mpu3050@68 {
+        reg = <0x68>;
+        compatible = "invn,mpu3050";
+        interrupt-parent = <&msm_gpio>;
+        interrupts = <96 0x2002>;
+        vlogic-supply = <&pm8909_l6>;
+        vdd-supply = <&pm8909_l17>;
+        pinctrl-names = "mpu_default","mpu_sleep";
+        pinctrl-0 = <&mpu3050_default>;
+        pinctrl-1 = <&mpu3050_sleep>;
+        invn,gpio-int = <&msm_gpio 96 0x2002>;
+        invn,poll-interval = <200>;
+        invn,axis-map-x = <1>;
+        invn,axis-map-y = <0>;
+        invn,axis-map-z = <2>;
+    };
+

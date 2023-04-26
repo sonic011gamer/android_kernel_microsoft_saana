@@ -1,0 +1,142 @@
+//Gsensor STM-LIS3DSHTR PINCTRL, BEGIN
+//GS_INT1
+    gsensor_int1_pin {
+        qcom,pins = <&gp 91>;
+        qcom,pin-func = <0>;
+        qcom,num-grp-pins = <1>;
+        label = "gsensor-irq1";
+        gsensor_irq1_default: gsensor_irq1_default {
+            drive-strength = <2>;
+            bias-pull-up;
+        };
+        gsensor_irq1_sleep: gsensor_irq1_sleep {
+            drive-strength = <2>;
+            bias-pull-up;
+        };
+    };
+//GS_INT2
+    gsensor_int2_pin {
+        qcom,pins = <&gp 110>;
+        qcom,pin-func = <0>;
+        qcom,num-grp-pins = <1>;
+        label = "gsensor-irq2";
+        gsensor_irq2_default: gsensor_irq2_default {
+            drive-strength = <2>;
+            bias-pull-up;
+        };
+        gsensor_irq2_sleep: gsensor_irq2_sleep {
+            drive-strength = <2>;
+            bias-pull-up;
+        };
+    };
+//Gsensor STM-LIS3DSHTR PINCTRL, END
+
+//ALS-PS STK3x1x PINCTRL, START
+    stk3x1x_int_pin {
+            qcom,pins = <&gp 94>;
+            qcom,pin-func = <0>;
+            qcom,num-grp-pins = <1>;
+            label = "stk3x1x-irq";
+            stk3x1x_default: stk3x1x_default {
+                    drive-strength = <6>;
+                    bias-pull-up;
+            };
+            stk3x1x_sleep: stk3x1x_sleep {
+                    drive-strength = <2>;
+                    bias-pull-down;
+            };
+    };
+//ALS-PS STK3x1x PINCTRL, END
+
+//Gyro MPU3050 PINCTRL, START
+    mpu3050_int_pin {
+        qcom,pins = <&gp 96>;
+        qcom,pin-func = <0>;
+        qcom,num-grp-pins = <1>;
+        label = "mpu3050-irq";
+        mpu3050_default: mpu3050_default {
+            drive-strength = <6>;
+            bias-pull-up;
+        };
+        mpu3050_sleep: mpu3050_sleep {
+            drive-strength = <2>;
+        };
+    };
+//Gyro MPU3050 PINCTRL, END
+
+//Gyro L3GD20 PINCTRL, START
+		gyro_int1_pin {
+			qcom,pins = <&gp 96>;
+			qcom,pin-func = <0>;
+			qcom,num-grp-pins = <1>;
+			label = "gyro-irq1";
+			gyro_irq1_default: gyro_irq1_default {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+			gyro_irq1_sleep: gyro_irq1_sleep {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+
+		gyro_int2_pin {
+			qcom,pins = <&gp 14>;
+			qcom,pin-func = <0>;
+			qcom,num-grp-pins = <1>;
+			label = "gyro-irq2";
+			gyro_irq2_default: gyro_irq2_default {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+			gyro_irq2_sleep: gyro_irq2_sleep {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+		gyro_enable_pin {
+			qcom,pins = <&gp 15>;
+			qcom,pin-func = <0>;
+			qcom,num-grp-pins = <1>;
+			label = "gyro-enable";
+			gyro_enable_default: gyro_enable_default {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+//Gyro L3GD20 PINCTRL, END
+
+
+//Touch S2716 PINCTRL, BEGIN
+                pmx_ts_power_pin {
+			qcom,pins = <&gp 89>;
+			qcom,pin-func = <0>;
+			qcom,num-grp-pins = <1>;
+			label = "pmx_ts_power_active";
+			ts_power_active: ts_power_active {
+				drive-strength = <16>;
+				bias-pull-up;
+			};
+			ts_power_sleep: ts_power_sleep {
+				drive-strength = <16>;
+				bias-pull-down; /* PULL DOWN */
+			};
+		};
+//Touch S2716 PINCTRL, END
+
+//BMA2x2
+//BMA2x2
+  bma2x2_en {
+       qcom,pins = <&gp 91>, <&gp 65>;
+       qcom,pin-func = <0>;
+       qcom,num-grp-pins = <2>;
+       label = "bma2x2_irq";
+       bma2x2_en_active: bma2x2_en_active {
+         drive-strength = <2>;
+         bias-pull-up;
+       };
+       bma2x2_en_sleep: bma2x2_en_sleep {
+         drive-strength = <2>;
+         bias-pull-down;
+       };
+  };

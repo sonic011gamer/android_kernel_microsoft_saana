@@ -1,0 +1,9 @@
+/*
+  FIH memory hole setting
+  Lock memory only in 1G RAM
+*/
+
+qcom,fih-mem-hole_lock_1G {
+	compatible = "qcom,fih-mem-hole_lock_1G";
+	qcom,memblock-remove = <0xC0000000 0x40000000>; /* Address and Size of Hole */
+};

@@ -1,0 +1,21 @@
+    STM,gyro@6a {
+        compatible = "fih,gyro";
+        reg = <0x6a>;
+        interrupt-parent = <&msm_gpio>;
+        interrupts = <96 0x2008>,<14 0x2008>;
+        pinctrl-names = "gyro_active","gyro_suspend";
+        pinctrl-0 = <&gyro_irq1_default &gyro_irq2_default &gyro_enable_default>;
+        pinctrl-1 = <&gyro_irq1_sleep &gyro_irq2_sleep>;
+        vcc_i2c-supply = <&pm8909_l6>;
+        vcc-supply = <&pm8909_l17>;
+        gyro,irq-gpio1  = <&msm_gpio 96 0x2008>;
+        gyro,irq-gpio2  = <&msm_gpio 14 0x2008>;
+        gyro,data-enable  = <&msm_gpio 15 0x00>;
+        gyro,axis-map-x = <0>;
+        gyro,axis-map-y = <1>;
+        gyro,axis-map-z = <2>;
+        gyro,negate-x;
+        gyro,negate-z;
+    };
+
+

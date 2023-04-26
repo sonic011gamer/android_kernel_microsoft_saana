@@ -1,0 +1,10 @@
+hallsensor{
+    compatible = "fih,hallsensor";
+    interrupt-parent = <&msm_gpio>;
+    interrupts = <92 0x3>;
+    pinctrl-names = "hallsensor_active","hallsensor_suspend";
+    pinctrl-0 = <&hallsensor_irq_default>;
+    pinctrl-1 = <&hallsensor_irq_sleep>;
+    vcc-supply = <&pm8909_l5>;
+    hallsensor,irq-gpio  = <&msm_gpio 92 0x00>;
+};

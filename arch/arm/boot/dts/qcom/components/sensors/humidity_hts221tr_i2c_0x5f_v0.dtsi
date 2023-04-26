@@ -1,0 +1,6 @@
+fih_pressure@5f{
+    compatible = "st,hts221";
+    reg = <0x5f>;
+    vcc_i2c-supply = <&pm8909_l6>;
+    mux_vcc-supply = <&pm8909_l17>;
+};

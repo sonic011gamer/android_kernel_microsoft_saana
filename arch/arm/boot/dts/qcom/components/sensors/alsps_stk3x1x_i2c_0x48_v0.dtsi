@@ -1,0 +1,22 @@
+    stk@48 {
+        compatible = "stk,stk3x1x";
+        reg = <0x48>;
+        interrupt-parent = <&msm_gpio>;
+        interrupts = <94 0x2008>;
+        pinctrl-names = "proximity_active","proximity_suspend";
+        pinctrl-0 = <&stk3x1x_default>;
+        pinctrl-1 = <&stk3x1x_sleep>;
+        vdd-supply = <&pm8909_l17>;
+        vio-supply = <&pm8909_l6>;
+        stk,irq-gpio = <&msm_gpio 94 0x2008>;
+        stk,transmittance = <500>;
+        stk,state-reg = <0x00>;
+        stk,psctrl-reg = <0x31>;
+        stk,alsctrl-reg = <0x2A>;
+        stk,ledctrl-reg = <0xFF>;
+        stk,wait-reg = <0x07>;
+        stk,ps-thd-h = <800>;
+        stk,ps-thd-l = <740>;
+        stk,use-fir;
+    };
+

@@ -1,0 +1,19 @@
+	synaptics@20 {
+		compatible = "synaptics,dsx";
+		reg = <0x20>;
+		interrupt-parent = <&msm_gpio>;
+		interrupts = <13 0x2008>;
+		vcc_i2c-supply = <&pm8909_l6>;
+		pinctrl-names = "pmx_ts_active","pmx_ts_suspend","pmx_ts_release";
+		pinctrl-0 = <&ts_int_active &ts_reset_active &ts_power_active>;
+		pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
+		pinctrl-2 = <&ts_release>;
+		synaptics,reset-gpio = <&msm_gpio 12 0x00>;
+		synaptics,irq-gpio  = <&msm_gpio 13 0x2008>;
+		synaptics,ex-ldo-en-gpio = <&msm_gpio 89 0x00>;
+		/*synaptics,i2c-pull-up;*/
+		/*synaptics,reg-en;*/
+		synaptics,x-flip = <0>;
+		synaptics,y-flip = <0>;
+		synaptics,button-map = <580 172 158>;
+	};

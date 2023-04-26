@@ -1,0 +1,15 @@
+/*
+   Backlight IC - RICHTEK RT4501/A
+
+*/
+
+rt4501@22 {
+	compatible = "rt,rt4501";
+	reg = <0x22>;
+	rt,en_pin = <&msm_gpio 16 0x00>;
+	rt,ovp_sel;
+	rt,max_curr;
+	rt,pwm_en;
+	rt,up_ramprate = <0>;
+	rt,down_ramprate = <0>;
+};

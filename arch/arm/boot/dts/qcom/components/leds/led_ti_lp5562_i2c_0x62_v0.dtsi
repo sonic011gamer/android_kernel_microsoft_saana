@@ -1,0 +1,30 @@
+/*
+   LED IC - LP5562
+
+*/
+
+lp5562@30 {
+	compatible = "ti,lp5562";
+	reg = <0x30>;
+	enable-gpio = <&msm_gpio 129 0x1>;
+	clock-mode = /bits/8 <1>;
+
+	chan0 {
+		chan-name = "red";
+		led-cur = /bits/ 8 <0x32>; /* 5mA */
+		max-cur = /bits/ 8 <0xFA>; /* 25mA */
+	};
+
+	chan1 {
+		chan-name = "green";
+		led-cur = /bits/ 8 <0x32>; /* 5mA */
+		max-cur = /bits/ 8 <0xFA>; /* 25mA */
+	};
+
+	chan2 {
+		chan-name = "blue";
+		led-cur = /bits/ 8 <0x32>; /* 5mA */
+		max-cur = /bits/ 8 <0xFA>; /* 25mA */
+	};
+
+};

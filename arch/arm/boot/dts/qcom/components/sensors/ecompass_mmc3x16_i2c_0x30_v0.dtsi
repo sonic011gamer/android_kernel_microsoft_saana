@@ -1,0 +1,9 @@
+    memsic@30 { /* Magnetic field sensor */
+        compatible = "memsic,mmc3416x";
+        reg = <0x30>;
+        vdd-supply = <&pm8909_l17>;
+        vio-supply = <&pm8909_l6>;
+        memsic,dir = "obverse-x-axis-backward";
+        memsic,auto-report;
+    };
+

@@ -1,0 +1,81 @@
+/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/dts-v1/;
+
+#include "msm8909-e1m-evt.dtsi"
+#include "msm8909-pm8909.dtsi"
+#include "msm8909-pm8909-e1m-evt.dtsi"
+#include "msm8909-memory-pstore.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. MSM8909-PM8909 1GB / FIH E1M EVT2!!!!!!!!!!";
+	compatible = "qcom,msm8909-fih", "qcom,msm8909", "qcom,cdp";
+	qcom,board-id= <0xC0 0>;
+        qcom,msm-id =   <245 0x1002>, <258 0x1002>,<265 0x1002>, <275 0x1002>;
+};
+
+&soc {
+        gpio_keys {
+                compatible = "gpio-keys";
+                input-name = "gpio-keys";
+                pinctrl-names = "tlmm_gpio_key_active","tlmm_gpio_key_suspend";
+                pinctrl-0 = <&gpio_key_active>;
+                pinctrl-1 = <&gpio_key_suspend>;
+
+                vol_up {
+                        label = "volume_up";/*it's vol_dn, cause of  key code is 114*/
+                        gpios = <&msm_gpio 90 0x1>;
+                        linux,input-type = <1>;
+                        /* FIH REQUIREMENT: NEED TO SEND VOLUME DOWN KEY*/
+                        linux,code = <114>;
+                        gpio-key,wakeup;
+                        debounce-interval = <15>;
+                };
+        };
+};
+
+&spmi_bus {
+        qcom,pm8909@0 {
+/*
+  AlanHZChang, Follow FIH BOOT REQE V3.0,
+   - PMIC RESIN: Volume UP KEY(KEY CODE 115)
+   - KPDPWR/RESIN DO NOT TRIGGER RESET FUNCTION
+   - KPDPWR+RESIN TRIGGER RESET FUNCTION
+*/
+     qcom,power-on@800 {
+         compatible = "qcom,qpnp-power-on";
+         reg = <0x800 0x100>;
+         interrupts = <0x0 0x8 0x0>,
+                 <0x0 0x8 0x1>,
+                 <0x0 0x8 0x4>,
+                 <0x0 0x8 0x5>;
+         interrupt-names = "kpdpwr", "resin",
+                 "resin-bark", "kpdpwr-resin-bark";
+         qcom,pon-dbc-delay = <15625>;
+         qcom,system-reset;
+         qcom,clear-warm-reset;
+         qcom,store-hard-reset-reason;
+         qcom,s3-debounce = <128>; 
+         qcom,s3-src = "kpdpwr-and-resin";
+
+
+      /* PON: RESIN */
+      qcom,pon_2 {
+          qcom,pon-type = <1>;
+          qcom,pull-up = <1>;
+          linux,code = <115>;/*vol_up key*/
+          qcom,support-reset = <0>;
+      };
+    };
+ };
+};
