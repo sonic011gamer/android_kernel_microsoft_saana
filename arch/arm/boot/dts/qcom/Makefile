@@ -302,7 +302,8 @@ dtb-$(CONFIG_ARCH_MSM8916) += msm8952-qrd-skum.dtb \
        msm8952-ext-codec-cdp.dtb \
        msm8952-mtp.dtb
 
-dtb-$(CONFIG_ARCH_MSM8909) += msm8909-e1m-evt2.dtb
+dtb-$(CONFIG_ARCH_MSM8909) += msm8909-msft-saana.dtb \
+	msm8909-e1m-evt2.dtb
 
 #msm8909-pm8916-mtp.dtb \
 	msm8909-pm8916-cdp.dtb \
