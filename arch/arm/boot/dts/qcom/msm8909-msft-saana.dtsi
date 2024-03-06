@@ -133,7 +133,7 @@
 			synaptics,reset-gpio = <&msm_gpio 12 0x0>;
 			synaptics,disable-gpios;
 			synaptics,display-coords = <0 0 719 1279>;
-			synaptics,panel-coords = <0 0 719 1405>;
+			synaptics,panel-coords = <0 0 719 1279>;
 		};
 	};
 
