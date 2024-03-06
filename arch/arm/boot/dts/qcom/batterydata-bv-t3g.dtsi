@@ -23,7 +23,7 @@ qcom,bv-t3g-batterydata {
 
 	qcom,fcc-temp-lut {
 		qcom,lut-col-legend = <(-20) 0 25 40 60>;
-		qcom,lut-data = <2087,2084,2084,2082,2068>;
+		qcom,lut-data = <2087 2084 2084 2082 2068>;
 	};
 
 	qcom,pc-temp-ocv-lut {

@@ -78,7 +78,8 @@ enum {	//this id syncs with the item 'fih,panel-id' of each panel's dtsi
 	NT35521S_INNO_720P_VIDEO_PANEL,	//SW4-HL-Dispay-BringUpNt35521sWithBlIcNt50568_ForD1M-00+_20160603
 	FT8716_1080P_VIDEO_PANEL,	//E1M
 	FT8716_720P_VIDEO_PANEL,	    /* E1M-576 - Add 720P Video panel */
-	SIMULATOR_VIDEO_PANEL	    /* E1M-576 - Add 720P Video panel */
+	SIMULATOR_VIDEO_PANEL,	    /* E1M-576 - Add 720P Video panel */
+	TEQUILA_720P_VIDEO_PANEL
 };
 //SW4-HL-Display-BringUpNT35521-00+}_20150224
 //SW4-HL-Display-AddCTCPanelHX8394DInsideSupport-00*}_20150317
