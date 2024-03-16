@@ -162,7 +162,7 @@
 		qcom,disp-maxx = <719>;
 		qcom,disp-maxy = <1279>;
 		qcom,panel-maxx = <719>;
-		qcom,panel-maxy = <1405>;
+		qcom,panel-maxy = <1279>;
 		qcom,key-codes = <158 139 172 217>;
 	};
 
@@ -275,15 +275,8 @@
 		qcom,rpull-up-kohm = <100>;
 		qcom,vref-batt-therm = <1800000>;
 
-		#include "batterydata-bv-t3g.dtsi"
-	};
-};
-/ {
-	mtp_batterydata: qcom,battery-data {
-		qcom,rpull-up-kohm = <100>;
-		qcom,vref-batt-therm = <1800000>;
-
-		#include "batterydata-palladium.dtsi"
+		#include "batterydata-bv-t3g-sdi.dtsi"
+		#include "batterydata-bv-t3g-lgc.dtsi"
 	};
 };
 
